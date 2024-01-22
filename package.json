@@ -1,0 +1,14 @@
+{
+  "name": "vanilla-component2",
+  "version": "0.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://ito-mono: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@github.com/ito-mono/vanilla-component2.git"
+  },
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "dist"
+  ]
+}
