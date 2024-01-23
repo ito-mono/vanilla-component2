@@ -29,7 +29,12 @@ jobs:
       - name: Build
         run: npm run build
       - name: publish npm package
-        run: npm publish
+        run: npm pack && npm publish
         working-directory: pkg
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: pkg
+          path: pkg/*.tgz
