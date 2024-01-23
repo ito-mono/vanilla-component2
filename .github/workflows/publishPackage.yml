@@ -24,16 +24,17 @@ jobs:
         with:
           node-version: '20'
           registry-url: https://npm.pkg.github.com
-      # MEMO: Github Actionsでnpm publishする場合は、手動でビルドしておく必要がある
-      #       → Actions内でビルドしたdistを対象にnpm pubishしても実際に配置されるパッケージには反映されない
-      #       → そのため、ビルド後のdistを対象にnpm publishするためのディレ
-      #
-      # - name: Install → ビルドを行うためdevDependenciesもインストールする
-      #   run: npm install
-      # - name: Build
-      #   run: npm run build
+      - name: Install → ビルドを行うためdevDependenciesもインストールする
+        run: npm install
+      - name: Build
+        run: npm run build
       - name: publish npm package
-        run: npm publish
+        run: npm pack && npm publish
         working-directory: pkg
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: pkg
+          path: pkg/*.tgz
