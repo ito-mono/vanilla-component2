@@ -24,10 +24,14 @@ jobs:
         with:
           node-version: '20'
           registry-url: https://npm.pkg.github.com
-      - name: Install → ビルドを行うためdevDependenciesもインストールする
-        run: npm install
-      - name: Build
-        run: npm run build
+      # MEMO: Github Actionsでnpm publishする場合は、手動でビルドしておく必要がある
+      #       → Actions内でビルドしたdistを対象にnpm pubishしても実際に配置されるパッケージには反映されない
+      #       → そのため、ビルド後のdistを対象にnpm publishするためのディレ
+      #
+      # - name: Install → ビルドを行うためdevDependenciesもインストールする
+      #   run: npm install
+      # - name: Build
+      #   run: npm run build
       - name: publish npm package
         run: npm publish
         working-directory: pkg
